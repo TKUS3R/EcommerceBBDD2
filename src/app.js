@@ -15,7 +15,7 @@ app.use('/api/cart', require('./routes/cart.routes'));
 app.use('/api/orders', require('./routes/orders.routes'));
 
 // Conectar bases de datos
-connectMongo();
-connectNeo4j();
+//connectMongo();
+//connectNeo4j();
 
 module.exports = app;

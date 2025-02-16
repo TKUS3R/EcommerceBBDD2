@@ -12,14 +12,23 @@ const client = createClient({
     password: process.env.REDIS_PASSWORD,
     socket: {
         host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT
+        port: parseInt(process.env.REDIS_PORT, 10)
     }
 });
 
 client.on("error", (err) => console.error("❌ Redis Client Error:", err));
 
-client.connect()
-    .then(() => console.log("✅ Conectado a Redis"))
-    .catch((err) => console.error("❌ Error al conectar a Redis:", err));
+async function connectRedis() {
+    if (!client.isOpen) {
+        try {
+            await client.connect();
+            console.log("✅ Conectado a Redis");
+        } catch (err) {
+            console.error("❌ Error al conectar a Redis:", err);
+        }
+    } else {
+        console.log("⚠️ Redis ya está conectado.");
+    }
+}
 
-module.exports = client;
+module.exports = { client, connectRedis };
