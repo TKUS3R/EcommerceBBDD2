@@ -23,3 +23,46 @@ exports.getInvoicesByUser = async (req, res) => {
         res.status(500).json({ message: "Error al obtener facturas", error });
     }
 };
+
+// Obtener todas las facturas
+exports.getAllInvoices = async (req, res) => {
+    try {
+        const invoices = await Invoice.find();
+        res.status(200).json(invoices);
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener facturas", error });
+    }
+};
+
+// Obtener factura por ID
+exports.getInvoiceById = async (req, res) => {
+    try {
+        const invoice = await Invoice.findById(req.params.id);
+        if (!invoice) return res.status(404).json({ message: "Factura no encontrada" });
+        res.status(200).json(invoice);
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener factura", error });
+    }
+};
+
+// Modificar factura
+exports.updateInvoice = async (req, res) => {
+    try {
+        const updatedInvoice = await Invoice.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedInvoice) return res.status(404).json({ message: "Factura no encontrada" });
+        res.status(200).json(updatedInvoice);
+    } catch (error) {
+        res.status(500).json({ message: "Error al actualizar factura", error });
+    }
+};
+
+// Eliminar factura
+exports.deleteInvoice = async (req, res) => {
+    try {
+        const deletedInvoice = await Invoice.findByIdAndDelete(req.params.id);
+        if (!deletedInvoice) return res.status(404).json({ message: "Factura no encontrada" });
+        res.status(200).json({ message: "Factura eliminada correctamente" });
+    } catch (error) {
+        res.status(500).json({ message: "Error al eliminar factura", error });
+    }
+};

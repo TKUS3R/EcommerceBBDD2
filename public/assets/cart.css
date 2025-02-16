@@ -77,3 +77,25 @@ button {
 button:hover {
     background: #0056b3;
 }
+
+
+/* ======= Solución para Footer en la parte inferior ======= */
+html, body {
+    height: 100%; /* Asegura que toda la página tenga altura completa */
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1; /* Esto empuja el footer hacia abajo */
+}
+
+/* Footer fijo abajo */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    margin-top: auto;
+}

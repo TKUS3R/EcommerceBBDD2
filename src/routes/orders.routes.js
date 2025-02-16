@@ -3,8 +3,12 @@ const { createOrder, getOrdersByUser } = require("../controllers/orders.controll
 
 const router = express.Router();
 
-router.post("/", createOrder);
-router.get("/:usuario_id", getOrdersByUser);
+router.post("/pedidos", orderController.createOrder);
+router.get("/:usuario_id", orderController.getOrdersByUser);
+router.get("/", orderController.getAllOrders);
+router.get("/:id", orderController.getOrderById);
+router.put("/:id", orderController.updateOrder);
+router.delete("/:id", orderController.deleteOrder);
 
 module.exports = router;
 
