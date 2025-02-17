@@ -1,20 +1,17 @@
+// config/redis.js
 require("dotenv").config();
 const { createClient } = require("redis");
 
-console.log("🔍 Conectando a Redis con:");
-console.log("➡️ Host:", process.env.REDIS_HOST);
-console.log("➡️ Port:", process.env.REDIS_PORT);
-console.log("➡️ Username:", process.env.REDIS_USERNAME || "default");
-console.log("➡️ Password:", process.env.REDIS_PASSWORD ? "********" : "NO DEFINIDO");
+// Verificar que la URL de Redis se esté cargando
+console.log("🔍 Conectando a Redis con URL:", process.env.REDIS_URL);
 
 const client = createClient({
+    url: process.env.REDIS_URL, // Usa la URL de Redis
     username: process.env.REDIS_USERNAME || "default",
     password: process.env.REDIS_PASSWORD,
-    socket: {
-        host: process.env.REDIS_HOST,
-        port: parseInt(process.env.REDIS_PORT, 10)
-    }
 });
+
+// El resto del código...
 
 client.on("error", (err) => console.error("❌ Redis Client Error:", err));
 

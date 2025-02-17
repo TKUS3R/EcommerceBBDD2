@@ -3,7 +3,7 @@ const { createProduct, getAllProducts } = require("../controllers/products.contr
 const { getHardcodedProducts } = require("../controllers/productController");
 
 const router = express.Router();
-const productController = require("../controllers/product.controller");
+const productController = require("../controllers/products.controller");
 
 router.post("/productos", productController.createProduct);
 router.get("/", productController.getAllProducts);;

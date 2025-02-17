@@ -1,5 +1,5 @@
 const express = require("express");
-const { createOrder, getOrdersByUser } = require("../controllers/orders.controller");
+const orderController = require("../controllers/orders.controller");
 
 const router = express.Router();
 
@@ -11,9 +11,3 @@ router.put("/:id", orderController.updateOrder);
 router.delete("/:id", orderController.deleteOrder);
 
 module.exports = router;
-
-
-/*
-POST /api/orders/ → Crear un pedido.
-GET /api/orders/:usuario_id → Obtener pedidos de un usuario.
-*/
