@@ -1,4 +1,4 @@
-require("dotenv").config();
+/*require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const { connectRedis } = require("./config/redis"); // Importa la función de conexión de Redis
@@ -17,4 +17,4 @@ connectRedis().then(() => {
 }).catch(err => {
     console.error("❌ No se pudo conectar a Redis. Cerrando la aplicación...", err);
     process.exit(1);
-});
+});*/
