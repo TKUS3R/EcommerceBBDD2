@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const { productosHardcodeados } = require("../models/Product");
 
 exports.createProduct = async (req, res) => {
     try {
@@ -60,5 +61,13 @@ exports.deleteProduct = async (req, res) => {
         res.status(200).json({ message: "Producto eliminado correctamente" });
     } catch (error) {
         res.status(500).json({ message: "Error al eliminar producto", error });
+    }
+};
+
+exports.getHardcodedProducts = async (req, res) => {
+    try {
+        res.json(productosHardcodeados);
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener productos", error });
     }
 };
