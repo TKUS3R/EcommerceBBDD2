@@ -13,9 +13,11 @@ const OrderSchema = new mongoose.Schema({
     total: { type: Number, required: true },
     estado: { type: String, enum: ["Pendiente", "Pagado", "Enviado", "Entregado"], default: "Pendiente" },
     direccion_envio: {
-        calle: String,
-        ciudad: String,
-        pais: String
+        type: {
+            calle: String,
+            ciudad: String,
+            pais: String
+        }, required: true
     }
 }, { timestamps: true });
 

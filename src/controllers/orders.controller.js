@@ -1,29 +1,6 @@
 const Order = require("../models/Order");
 const User = require("../models/User");
-
-exports.createOrder = async (req, res) => {
-    try {
-        const { usuario_id, productos, direccion_envio } = req.body;
-
-        const total = productos.reduce((sum, item) => sum + item.cantidad * item.precio_unitario, 0);
-
-        const newOrder = new Order({
-            usuario_id,
-            productos,
-            total,
-            direccion_envio
-        });
-
-        await newOrder.save();
-
-        // Agregar el pedido al historial del usuario
-        await User.findByIdAndUpdate(usuario_id, { $push: { historial_pedidos: newOrder._id } });
-
-        res.status(201).json({ message: "Pedido creado exitosamente", pedido: newOrder });
-    } catch (error) {
-        res.status(500).json({ message: "Error al crear el pedido", error });
-    }
-};
+const Cart = require("../models/Cart");
 
 exports.getOrdersByUser = async (req, res) => {
     try {

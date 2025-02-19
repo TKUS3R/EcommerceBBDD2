@@ -1,7 +1,11 @@
+const { esAdmin } = require("../auth/middleware");
 const Product = require("../models/Product");
 const { productosHardcodeados } = require("../models/Product");
 
 exports.createProduct = async (req, res) => {
+    if (await esAdmin(req.usuario.id) == false) {
+        res.status(403).json({ message: "Accion no autorizada" });
+    }
     try {
         const { nombre, descripcion, categorias, precio_actual, stock, imagen } = req.body;
 
@@ -61,13 +65,5 @@ exports.deleteProduct = async (req, res) => {
         res.status(200).json({ message: "Producto eliminado correctamente" });
     } catch (error) {
         res.status(500).json({ message: "Error al eliminar producto", error });
-    }
-};
-
-exports.getHardcodedProducts = async (req, res) => {
-    try {
-        res.json(productosHardcodeados);
-    } catch (error) {
-        res.status(500).json({ message: "Error al obtener productos", error });
     }
 };

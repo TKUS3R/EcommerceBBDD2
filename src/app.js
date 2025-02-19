@@ -9,7 +9,6 @@ console.log("PORT:", process.env.PORT);
 const express = require('express');
 const cors = require('cors');
 const connectMongo = require('./config/mongo');
-const { connectRedis } = require('./config/redis');
 
 const app = express();
 
@@ -32,15 +31,6 @@ app.use("/app/cart", cartRoutes);
 
 // Conectar a la base de datos
 connectMongo(); // Conectar a MongoDB
-
-// Agregar un manejo de conexión para Redis
-connectRedis()
-    .then(() => {
-        console.log("✅ Conexión a Redis establecida");
-    })
-    .catch(err => {
-        console.error("❌ Error al conectar a Redis:", err);
-    });
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000; // Usa el puerto del .env o 3000 por defecto

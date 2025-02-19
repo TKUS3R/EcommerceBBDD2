@@ -3,11 +3,12 @@ const { createProduct, getAllProducts } = require("../controllers/products.contr
 
 const router = express.Router();
 const productController = require("../controllers/products.controller");
+const { verificarToken } = require("../auth/middleware");
 
-router.post("/productos", productController.createProduct);
-router.get("/", productController.getAllProducts);;
+router.post("/productos", verificarToken, productController.createProduct);
+router.get("/", productController.getAllProducts);
 router.get("/:id", productController.getProductById);
-router.put("/:id", productController.updateProduct);
-router.delete("/:id", productController.deleteProduct);
+router.put("/:id",verificarToken, productController.updateProduct);
+router.delete("/:id",verificarToken, productController.deleteProduct);
 
 module.exports = router;

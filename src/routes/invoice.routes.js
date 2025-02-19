@@ -1,14 +1,16 @@
 const express = require("express");
-const { createInvoice, getInvoicesByUser } = require("../controllers/invoice.controller");
 
 const router = express.Router()
 const invoiceController = require("../controllers/invoice.controller");
 
-router.post("/facturas", invoiceController.createInvoice);
-router.get("/:usuario_id", invoiceController.getInvoicesByUser);
-router.get("/", invoiceController.getAllInvoices);
-router.get("/:id", invoiceController.getInvoiceById);
-router.put("/:id", invoiceController.updateInvoice);
-router.delete("/:id", invoiceController.deleteInvoice);
+const { verificarToken } = require("../auth/middleware");
+
+router.post("/facturas",verificarToken, invoiceController.createInvoice);
+router.get("/:usuario_id",verificarToken, invoiceController.getInvoicesByUser);
+router.get("/",verificarToken, invoiceController.getAllInvoices);
+router.get("/:id",verificarToken, invoiceController.getInvoiceById);
+router.put("/:id",verificarToken, invoiceController.updateInvoice);
+router.delete("/:id",verificarToken, invoiceController.deleteInvoice);
+router.post("/payment",verificarToken, invoiceController.payInvoice);
 
 module.exports = router;
